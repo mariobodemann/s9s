@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import math
 import random
-
+import sys
 
 def slackify(color: str | tuple, letter: str):
     if isinstance(color, type(())):
@@ -63,6 +63,19 @@ fonts = {
     'upper': default_fraktur.upper(),
 }
 
+boxes = {
+    'single': '┌─┐│ │└─┘',
+    'cheap': '+-+| |+-+',
+    'double': '╔═╗║ ║╚═╝',
+    'thick': '┏━┓┃ ┃┗━┛',
+    'round': '╭─╮│ │╰─╯',
+}
+
+box_alignments = {
+    'left': lambda m,l: f"{m:{l}s}",
+    'center': lambda m,l: m.center(l),
+    'right': lambda m,l: m.rjust(l),
+}
 
 def term_color(color):
     r, g, b = color
@@ -145,7 +158,7 @@ def index_in_font(c: str) -> int | None:
             return ord(c) - ord('a') + 26
     elif c.isdigit():
         return 2*26 + int(c)
-    elif c.isspace():
+    elif c == ' ' or c == '\t':
         return -1
     elif c == '?':
         return -2
@@ -160,23 +173,30 @@ def fraktur(message, font):
     if font in fonts:
         for c in message:
             index = index_in_font(c)
-            if index is not None:
+            if index:
                 out += fonts[font][index]
             else:
                 out += c
     else:
-        out = f"Font '{font}' not found."
+        print(f"Font '{font}' not found.", file=sys.stderr)
+        return message
+
     return out
 
 
-def fraktur_all(message, selected_fonts=None, modes=None):
+def fraktur_all(message, selected_fonts=None, modes=None, box=None, align=None):
     if not modes:
         modes = []
 
     if selected_fonts is None:
         selected_fonts = list(fonts.keys())
 
+    orig_message = message
+
     for font in sorted(selected_fonts):
+        if box:
+            message = boxify(orig_message, box, align)
+
         result = fraktur(message, font)
 
         if 'rainbow' in modes:
@@ -184,27 +204,58 @@ def fraktur_all(message, selected_fonts=None, modes=None):
             result = "".join(rainbowify(result, html))
 
         if 'name' in modes:
-             result = f"{font}: {result}"
+            sep = "\n" if box else " "
+
+            result = f"{font}:{sep}{result}"
 
         print(result)
 
 
-def generate(message: str, font: str = None, modes: list = None):
+def boxify(message, box=None, align=None):
+    if not box:
+        box = 'single'
+    if not align:
+        align = 'left'
+
+    if box == 'all':
+        result = message
+        for allBox in boxes:
+            result = boxify(result, allBox, align)
+        return result
+    else:
+        lines = message.splitlines()
+        max_line = max(lines,key=len)
+        max_line_length = len(max_line)
+
+        if box in boxes:
+            nw,n,ne,w,c,e,sw,s,se = boxes[box]
+
+            top = nw + n*max_line_length + ne
+            inner = [w + box_alignments[align](x, max_line_length) + e for x in lines]
+            bottom = sw + s*max_line_length + se
+
+            return '\n'.join([top,*inner,bottom])
+        else:
+            print(f'Box "{box}" not found. Ignored.',file=sys.stderr)
+            return message
+
+
+def generate(message: str, font: str = None, modes: list = None, box: str = None, align: str = None):
     if not modes:
         modes = []
 
     if not font:
-        fraktur_all(message, ['fraktur'], modes)
+        fraktur_all(message, ['fraktur'], modes, box, align)
     else:
         if font == 'all':
-            fraktur_all(message, list(fonts.keys()), modes)
+            fraktur_all(message, list(fonts.keys()), modes, box, align)
         else:
             if font in fonts:
-                fraktur_all(message, [font], modes)
+                fraktur_all(message, [font], modes, box, align)
             else:
                 found_fonts = list(filter(lambda x: x.lower().find(font.lower()) > -1, fonts.keys()))
                 if len(found_fonts) > 0:
-                    fraktur_all(message, found_fonts, modes)
+                    fraktur_all(message, found_fonts, modes, box, align)
                 else:
                     print(f"Font {font} not found.")
 
@@ -223,11 +274,13 @@ def main():
         type=str,
         nargs='*',
         default=["Hello World."],
-        help="Text to be frakturzied. Defaults to 'Hello World.'.")
+        help="Text to be frakturzied. Defaults to 'Hello World.'."
+    )
     parser.add_argument(
         '--font', '-f',
         metavar='FONT | all',
-        help=f'One font of "{", ".join(fonts.keys())}", or "all" for all fonts consecutively.')
+        help=f'One font of "{", ".join(fonts.keys())}", or "all" for all fonts consecutively.'
+    )
     parser.add_argument(
         '--modes', '-m',
         metavar='MODE',
@@ -235,6 +288,16 @@ def main():
         type=str,
         nargs='*',
         help='One of these modes: "rainbow, html, name".'
+    )
+    parser.add_argument(
+        '--box', '-b',
+        metavar='BOX',
+        help=f'Select a box from "{", ".join(boxes.keys())}".'
+    )
+    parser.add_argument(
+        '--align', '-a',
+        metavar='ALIGNMENT',
+        help=f'Select a text alignment (in box) from one of "{", ".join(box_alignments.keys())}".'
     )
     parser.add_argument(
         '--list', '-l',
@@ -263,6 +326,8 @@ def main():
             message=args.message,
             font=args.font,
             modes=args.modes,
+            box=args.box,
+            align=args.align
         )
 
 
