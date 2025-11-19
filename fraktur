@@ -184,7 +184,7 @@ def fraktur(message, font):
     return out
 
 
-def fraktur_all(message, selected_fonts=None, modes=None, box=None, align=None):
+def fraktur_all(message, selected_fonts=None, modes=None, box=None, align=None)-> str:
     if not modes:
         modes = []
 
@@ -193,6 +193,7 @@ def fraktur_all(message, selected_fonts=None, modes=None, box=None, align=None):
 
     orig_message = message
 
+    results = ''
     for font in sorted(selected_fonts):
         if box:
             message = boxify(orig_message, box, align)
@@ -208,7 +209,9 @@ def fraktur_all(message, selected_fonts=None, modes=None, box=None, align=None):
 
             result = f"{font}:{sep}{result}"
 
-        print(result)
+        results += result + '\n'
+
+    return results
 
 
 def boxify(message, box=None, align=None):
@@ -240,25 +243,24 @@ def boxify(message, box=None, align=None):
             return message
 
 
-def generate(message: str, font: str = None, modes: list = None, box: str = None, align: str = None):
+def generate(message: str, font: str = None, modes: list = None, box: str = None, align: str = None) -> str:
     if not modes:
         modes = []
 
     if not font:
-        fraktur_all(message, ['fraktur'], modes, box, align)
+        return fraktur_all(message, ['fraktur'], modes, box, align)
     else:
         if font == 'all':
-            fraktur_all(message, list(fonts.keys()), modes, box, align)
+            return fraktur_all(message, list(fonts.keys()), modes, box, align)
         else:
             if font in fonts:
-                fraktur_all(message, [font], modes, box, align)
+                return fraktur_all(message, [font], modes, box, align)
             else:
                 found_fonts = list(filter(lambda x: x.lower().find(font.lower()) > -1, fonts.keys()))
                 if len(found_fonts) > 0:
-                    fraktur_all(message, found_fonts, modes, box, align)
+                    return fraktur_all(message, found_fonts, modes, box, align)
                 else:
-                    print(f"Font {font} not found.")
-
+                    return f"Font {font} not found."
 
 def main():
     import sys
@@ -322,13 +324,15 @@ def main():
             args.message = 'Hello World.'
 
     if doit:
-        generate(
+        result = generate(
             message=args.message,
             font=args.font,
             modes=args.modes,
             box=args.box,
             align=args.align
         )
+
+        print(result)
 
 
 if __name__ == "__main__":
