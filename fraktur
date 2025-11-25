@@ -66,7 +66,7 @@ fonts = {
 
 boxes = {
     'single': '┌─┐│ │└─┘',
-    'cheap': '+-+| |+-+',
+    'ascii': '+-+| |+-+',
     'double': '╔═╗║ ║╚═╝',
     'thick': '┏━┓┃ ┃┗━┛',
     'round': '╭─╮│ │╰─╯',
@@ -282,7 +282,7 @@ def main():
     parser.add_argument(
         '--font', '-f',
         metavar='FONT | all',
-        help=f'One font of "{", ".join(fonts.keys())}", or "all" for all fonts consecutively.'
+        help=f'One font of [{", ".join(['all'] + list(fonts.keys()))}], "all" for all fonts consecutively.'
     )
     parser.add_argument(
         '--modes', '-m',
@@ -295,12 +295,12 @@ def main():
     parser.add_argument(
         '--box', '-b',
         metavar='BOX',
-        help=f'Select a box from "{", ".join(boxes.keys())}".'
+        help=f'Select a box from [{", ".join(['all'] + list(boxes.keys()))}], "all" for cascading boxes.'
     )
     parser.add_argument(
         '--align', '-a',
         metavar='ALIGNMENT',
-        help=f'Select a text alignment (in box) from one of "{", ".join(box_alignments.keys())}".'
+        help=f'Select a text alignment (in box) from one of [{", ".join(box_alignments.keys())}].'
     )
     parser.add_argument(
         '--list', '-l',
