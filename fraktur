@@ -61,6 +61,7 @@ fonts = {
     'slack-random': list(map(lambda x: slackify(('yellow', 'white'), x), default_fraktur)),
     'slack-yellow': list(map(lambda x: slackify('yellow', x), default_fraktur)),
     'small-caps': "ABCDEFGHIJKLMNOPQRSTUVWXYZᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ𝟢𝟣𝟤𝟥𝟦𝟧𝟨𝟩𝟪𝟫!? ",
+    'spoiler': list(map(lambda x: '░▒▓'[random.randint(0,2)], default_fraktur)),
     'upper': default_fraktur.upper(),
 }
 
