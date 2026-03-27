@@ -334,7 +334,7 @@ def main():
             align=args.align
         )
 
-        print(result)
+        print(result, end="", flush=True)
 
 
 if __name__ == "__main__":
