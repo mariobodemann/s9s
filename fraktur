@@ -153,13 +153,13 @@ def rainbowify(message, as_html=False):
 
 
 def index_in_font(c: str) -> int | None:
-    if c.isalpha():
+    if c.isascii() and c.isalpha():
         if c.isupper():
             return ord(c) - ord('A')
         else:
             return ord(c) - ord('a') + 26
     elif c.isdigit():
-        return 2*26 + int(c)
+        return 2*26 + int(c[0])
     elif c == ' ' or c == '\t':
         return -1
     elif c == '?':
