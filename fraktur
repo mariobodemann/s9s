@@ -24,6 +24,9 @@ def slackify(color: str | tuple, letter: str):
     else:
         return f":alphabet-{color.lower()}-{letter.lower()}:"
 
+def zalgo(i):
+    r = random.Random()
+    return "".join([chr(r.randint(0x0300, 0x036f)) for a in range(i)])
 
 default_fraktur = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!? "
 fonts = {
@@ -63,6 +66,24 @@ fonts = {
     'small-caps': "ABCDEFGHIJKLMNOPQRSTUVWXYZᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ𝟢𝟣𝟤𝟥𝟦𝟧𝟨𝟩𝟪𝟫!? ",
     'spoiler': list(map(lambda x: '░▒▓'[random.randint(0,2)], default_fraktur)),
     'upper': default_fraktur.upper(),
+    'xxx-aed': [f'{x}\u0363' for x in default_fraktur],
+    'xxx-arrowed-both': [f'{x}\u20e1' for x in default_fraktur],
+    'xxx-arrowed-left': [f'{x}\u20d6' for x in default_fraktur],
+    'xxx-arrowed-right': [f'{x}\u20d7' for x in default_fraktur],
+    'xxx-slashed': [f'{x}\u0336' for x in default_fraktur],
+    'xxx-stricken-single': [f'{x}\u0337' for x in default_fraktur],
+    'xxx-stricken-double': [f'{x}\u20eb' for x in default_fraktur],
+    'xxx-stricken-mirrored': [f'{x}\u20e5' for x in default_fraktur],
+    'xxx-senior-over': [f'{x}\u0360' for x in default_fraktur],
+    'xxx-senior-under': [f'{x}\u033c' for x in default_fraktur],
+    'xxx-triangled': [f'{x}\u20e4' for x in default_fraktur],
+    'xxx-umläüted-over': [f'{x}\u0308' for x in default_fraktur],
+    'xxx-umläüted-under': [f'{x}\u0324' for x in default_fraktur],
+    'xxx-underline-double': [f'{x}\u0333' for x in default_fraktur],
+    'xxx-underline-single': [f'{x}\u0332' for x in default_fraktur],
+    'xxx-underline-wave': [f'{x}\u0330' for x in default_fraktur],
+    'xxx-wifi': [f'{x}\u0352' for x in default_fraktur],
+    'xxx-zalgo': [f'{x}{zalgo(111)}' for x in default_fraktur],
 }
 
 boxes = {
