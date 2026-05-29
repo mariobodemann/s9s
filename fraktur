@@ -196,7 +196,7 @@ def fraktur(message, font):
     if font in fonts:
         for c in message:
             index = index_in_font(c)
-            if index is not None and index > -1:
+            if index is not None:
                 out += fonts[font][index]
             else:
                 out += c
