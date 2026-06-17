@@ -29,61 +29,61 @@ def zalgo(i):
     return "".join([chr(r.randint(0x0300, 0x036f)) for a in range(i)])
 
 default_fraktur = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!? "
-fonts = {
-    'none': default_fraktur,
-    'bbb': "┌┐└┘│─╔╗╚╝║═┏┓┗┛┃━╭╮╰╯█▉▊▋┌┐└┘│─╔╗╚╝║═┏┓┗┛┃━╭╮╰╯█▉▊▋┌┐└┘│─╔╗╚╝║═┏┓┗┛┃━╭╮╰╯█▉▊▋",
-    'bold': "𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙𝐚𝐛𝐜𝐝𝐞𝐟𝐠𝐡𝐢𝐣𝐤𝐥𝐦𝐧𝐨𝐩𝐪𝐫𝐬𝐭𝐮𝐯𝐰𝐱𝐲𝐳𝟎𝟏𝟐𝟑𝟒𝟓𝟔𝟕𝟖𝟗!? ",
-    'bold-italic': "𝑨𝑩𝑪𝑫𝑬𝑭𝑮𝑯𝑰𝑱𝑲𝑳𝑴𝑵𝑶𝑷𝑸𝑹𝑺𝑻𝑼𝑽𝑾𝑿𝒀𝒁𝒂𝒃𝒄𝒅𝒆𝒇𝒈𝒉𝒊𝒋𝒌𝒍𝒎𝒏𝒐𝒑𝒒𝒓𝒔𝒕𝒖𝒗𝒘𝒙𝒚𝒛𝟎𝟏𝟐𝟑𝟒𝟓𝟔𝟕𝟖𝟗!? ",
-    'bold-sans': "𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭𝗮𝗯𝗰𝗱𝗲𝗳𝗴𝗵𝗶𝗷𝗸𝗹𝗺𝗻𝗼𝗽𝗾𝗿𝘀𝘁𝘂𝘃𝘄𝘅𝘆𝘇𝟬𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵!? ",
-    'border': "𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡!? ",
-    'cards': "🂠🂡🂢🂣🂤🂥🂦🂧🂨🂩🂪🂫🂬🂭🂮🂱🂲🂳🂴🂵🂶🂷🂸🂹🂺🂻🂼🂽🂾🃁🃂🃃🃄🃅🃆🃇🃈🃉🃊🃋🃌🃍🃎🃑🃒🃓🃔🃕🃖🃗🃘🃙🃚🃛🃜🃝🃞🃟🃟🃟🃟🃟!? ",
-    'censored': list(map(lambda x: '█', default_fraktur)),
-    'cesar': "AMWOEZKFYBVXPQCGDLJRITNUHSbfnzuymvokwaecxjghrtqpisld321465897?! ",
-    'chess': "♔♕♖♗♘♙♚♛♜♝♞♟︎♔♕♖♗♘♙♚♛♜♝♞♟︎♔♕♖♗♘♙♚♛♜♝♞♟︎♔♕♖♗♘♙♚♛♜♝♞♟︎♔♕♖♗♘♙♚♛♜♝♞♟︎!? ",
-    'circle': "ⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ⓪①②③④⑤⑥⑦⑧⑨!? ",
-    'circle-bold': "🅐🅑🅒🅓🅔🅕🅖🅗🅘🅙🅚🅛🅜🅝🅞🅟🅠🅡🅢🅣🅤🅥🅦🅧🅨🅩🅐🅑🅒🅓🅔🅕🅖🅗🅘🅙🅚🅛🅜🅝🅞🅟🅠🅡🅢🅣🅤🅥🅦🅧🅨🅩⓿❶❷❸❹❺❻❼❽❾!? ",
-    'double': "𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡!? ",
-    'fraktur': "𝔄𝔅ℭ𝔇𝔈𝔉𝔊ℌℑ𝔍𝔎𝔏𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷0123456789!? ",
-    'fraktur-bold': "𝕬𝕭𝕮𝕯𝕰𝕱𝕲𝕳𝕴𝕵𝕶𝕷𝕸𝕹𝕺𝕻𝕼𝕽𝕾𝕿𝖀𝖁𝖂𝖃𝖄𝖅𝖆𝖇𝖈𝖉𝖊𝖋𝖌𝖍𝖎𝖏𝖐𝖑𝖒𝖓𝖔𝖕𝖖𝖗𝖘𝖙𝖚𝖛𝖜𝖝𝖞𝖟𝟎𝟏𝟐𝟑𝟒𝟓𝟔𝟕𝟖𝟗!? ",
-    'italic': "𝘈𝘉𝘊𝘋𝘌𝘍𝘎𝘏𝘐𝘑𝘒𝘓𝘔𝘕𝘖𝘗𝘘𝘙𝘚𝘛𝘜𝘝𝘞𝘟𝘠𝘡𝘢𝘣𝘤𝘥𝘦𝘧𝘨𝘩𝘪𝘫𝘬𝘭𝘮𝘯𝘰𝘱𝘲𝘳𝘴𝘵𝘶𝘷𝘸𝘹𝘺𝘻0123456789!? ",
-    'italic-sans': "𝘈𝘉𝘊𝘋𝘌𝘍𝘎𝘏𝘐𝘑𝘒𝘓𝘔𝘕𝘖𝘗𝘘𝘙𝘚𝘛𝘜𝘝𝘞𝘟𝘠𝘡𝘢𝘣𝘤𝘥𝘦𝘧𝘨𝘩𝘪𝘫𝘬𝘭𝘮𝘯𝘰𝘱𝘲𝘳𝘴𝘵𝘶𝘷𝘸𝘹𝘺𝘻0123456789!? ",
-    'lower': default_fraktur.lower(),
-    'mono': "𝙰𝙱𝙲𝙳𝙴𝙵𝙶𝙷𝙸𝙹𝙺𝙻𝙼𝙽𝙾𝙿𝚀𝚁𝚂𝚃𝚄𝚅𝚆𝚇𝚈𝚉𝚊𝚋𝚌𝚍𝚎𝚏𝚐𝚑𝚒𝚓𝚔𝚕𝚖𝚗𝚘𝚙𝚚𝚛𝚜𝚝𝚞𝚟𝚠𝚡𝚢𝚣𝟶𝟷𝟸𝟹𝟺𝟻𝟼𝟽𝟾𝟿!? ",
-    'morse': ["·– ", "–··· ", "–·–· ", "–·· ", "· ", "··–· ", "––· ", "···· ", "·· ", "·––– ", "–·– ", "·–·· ", "–– ", "–· ", "––– ", "·––· ", "––·– ", "·–· ", "··· ", "– ", "··– ", "···– ", "·–– ", "–··– ", "–·–– ", "––·· ", "·– ", "–··· ", "–·–· ", "–·· ", "· ", "··–· ", "––· ", "···· ", "·· ", "·––– ", "–·– ", "·–·· ", "–– ", "–· ", "––– ", "·––· ", "––·– ", "·–· ", "··· ", "– ", "··– ", "···– ", "·–– ", "–··– ", "–·–– ", "––·· ", "––––– ", "·–––– ", "··––– ", "···–– ", "····– ", "····· ", "–···· ", "––··· ", "–––·· ", "––––· ", " ", " ","/ "],
-    'numbers': list(map(lambda x: f"{ord(x):d} ", default_fraktur)),
-    'numbers-binary': list(map(lambda x: f"{ord(x):0b} ", default_fraktur)),
-    'numbers-hex': list(map(lambda x: f"0x{ord(x):X} ", default_fraktur)),
-    'parenthesized': "🄐🄑🄒🄓🄔🄕🄖🄗🄘🄙🄚🄛🄜🄝🄞🄟🄠🄡🄢🄣🄤🄥🄦🄧🄨🄩⒜⒝⒞⒟⒠⒡⒢⒣⒤⒥⒦⒧⒨⒩⒪⒫⒬⒭⒮⒯⒰⒱⒲⒳⒴⒵⒪⑴⑵⑶⑷⑸⑹⑺⑻⑼!? ",
-    'rect': "🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉𝟶𝟷𝟸𝟹𝟺𝟻𝟼𝟽𝟾𝟿!? ",
-    'rect-bold': "🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉0123456789!? ",
-    'rect-dotted': ["🇦 ","🇧 ","🇨 ","🇩 ","🇪 ","🇫 ","🇬 ","🇭 ","🇮 ","🇯 ","🇰 ","🇱 ","🇲 ","🇳 ","🇴 ","🇵 ","🇶 ","🇷 ","🇸 ","🇹 ","🇺 ","🇻 ","🇼 ","🇽 ","🇾 ","🇿 ","🇦 ","🇧 ","🇨 ","🇩 ","🇪 ","🇫 ","🇬 ","🇭 ","🇮 ","🇯 ","🇰 ","🇱 ","🇲 ","🇳 ","🇴 ","🇵 ","🇶 ","🇷 ","🇸 ","🇹 ","🇺 ","🇻 ","🇼 ","🇽 ","🇾 ","🇿 ","0","1","2","3","4","5","6","7","8","9","!","?"," "],
-    'script': "𝒜𝐵𝒞𝒟𝐸𝐹𝒢𝐻𝐼𝒥𝒦𝐿𝑀𝒩𝒪𝒫𝒬𝑅𝒮𝒯𝒰𝒱𝒲𝒳𝒴𝒵𝒶𝒷𝒸𝒹𝑒𝒻𝑔𝒽𝒾𝒿𝓀𝓁𝓂𝓃𝑜𝓅𝓆𝓇𝓈𝓉𝓊𝓋𝓌𝓍𝓎𝓏𝟢𝟣𝟤𝟥𝟦𝟧𝟨𝟩𝟪𝟫!? ",
-    'script-bold': "𝓐𝓑𝓒𝓓𝓔𝓕𝓖𝓗𝓘𝓙𝓚𝓛𝓜𝓝𝓞𝓟𝓠𝓡𝓢𝓣𝓤𝓥𝓦𝓧𝓨𝓩𝓪𝓫𝓬𝓭𝓮𝓯𝓰𝓱𝓲𝓳𝓴𝓵𝓶𝓷𝓸𝓹𝓺𝓻𝓼𝓽𝓾𝓿𝓌𝓍𝓎𝓏𝟢𝟣𝟤𝟥𝟦𝟧𝟨𝟩𝟪𝟫!? ",
-    'slack': list(map(lambda x: slackify('white', x), default_fraktur)),
-    'slack-scrabble': list(map(lambda x: f':l-{x.lower()}:' if x.isalpha() else ':l-blank:', default_fraktur)),
-    'slack-random': list(map(lambda x: slackify(('yellow', 'white'), x), default_fraktur)),
-    'slack-yellow': list(map(lambda x: slackify('yellow', x), default_fraktur)),
-    'small-caps': "ABCDEFGHIJKLMNOPQRSTUVWXYZᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ𝟢𝟣𝟤𝟥𝟦𝟧𝟨𝟩𝟪𝟫!? ",
-    'spoiler': list(map(lambda x: '░▒▓'[random.randint(0,2)], default_fraktur)),
-    'upper': default_fraktur.upper(),
-    'xxx-aed': [f'{x}\u0363' for x in default_fraktur],
-    'xxx-arrowed-both': [f'{x}\u20e1' for x in default_fraktur],
-    'xxx-arrowed-left': [f'{x}\u20d6' for x in default_fraktur],
-    'xxx-arrowed-right': [f'{x}\u20d7' for x in default_fraktur],
-    'xxx-slashed': [f'{x}\u0336' for x in default_fraktur],
-    'xxx-stricken-single': [f'{x}\u0337' for x in default_fraktur],
-    'xxx-stricken-double': [f'{x}\u20eb' for x in default_fraktur],
-    'xxx-stricken-mirrored': [f'{x}\u20e5' for x in default_fraktur],
-    'xxx-senior-over': [f'{x}\u0360' for x in default_fraktur],
-    'xxx-senior-under': [f'{x}\u033c' for x in default_fraktur],
-    'xxx-triangled': [f'{x}\u20e4' for x in default_fraktur],
-    'xxx-umläüted-over': [f'{x}\u0308' for x in default_fraktur],
-    'xxx-umläüted-under': [f'{x}\u0324' for x in default_fraktur],
-    'xxx-underline-double': [f'{x}\u0333' for x in default_fraktur],
-    'xxx-underline-single': [f'{x}\u0332' for x in default_fraktur],
-    'xxx-underline-wave': [f'{x}\u0330' for x in default_fraktur],
-    'xxx-wifi': [f'{x}\u0352' for x in default_fraktur],
-    'xxx-zalgo': [f'{x}{zalgo(111)}' for x in default_fraktur],
+font_generators = {
+    'none': lambda x: default_fraktur,
+    'bbb': lambda x: "┌┐└┘│─╔╗╚╝║═┏┓┗┛┃━╭╮╰╯█▉▊▋┌┐└┘│─╔╗╚╝║═┏┓┗┛┃━╭╮╰╯█▉▊▋┌┐└┘│─╔╗╚╝║═┏┓┗┛┃━╭╮╰╯█▉▊▋",
+    'bold': lambda x: "𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙𝐚𝐛𝐜𝐝𝐞𝐟𝐠𝐡𝐢𝐣𝐤𝐥𝐦𝐧𝐨𝐩𝐪𝐫𝐬𝐭𝐮𝐯𝐰𝐱𝐲𝐳𝟎𝟏𝟐𝟑𝟒𝟓𝟔𝟕𝟖𝟗!? ",
+    'bold-italic': lambda x: "𝑨𝑩𝑪𝑫𝑬𝑭𝑮𝑯𝑰𝑱𝑲𝑳𝑴𝑵𝑶𝑷𝑸𝑹𝑺𝑻𝑼𝑽𝑾𝑿𝒀𝒁𝒂𝒃𝒄𝒅𝒆𝒇𝒈𝒉𝒊𝒋𝒌𝒍𝒎𝒏𝒐𝒑𝒒𝒓𝒔𝒕𝒖𝒗𝒘𝒙𝒚𝒛𝟎𝟏𝟐𝟑𝟒𝟓𝟔𝟕𝟖𝟗!? ",
+    'bold-sans': lambda x: "𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭𝗮𝗯𝗰𝗱𝗲𝗳𝗴𝗵𝗶𝗷𝗸𝗹𝗺𝗻𝗼𝗽𝗾𝗿𝘀𝘁𝘂𝘃𝘄𝘅𝘆𝘇𝟬𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵!? ",
+    'border': lambda x: "𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡!? ",
+    'cards': lambda x: "🂠🂡🂢🂣🂤🂥🂦🂧🂨🂩🂪🂫🂬🂭🂮🂱🂲🂳🂴🂵🂶🂷🂸🂹🂺🂻🂼🂽🂾🃁🃂🃃🃄🃅🃆🃇🃈🃉🃊🃋🃌🃍🃎🃑🃒🃓🃔🃕🃖🃗🃘🃙🃚🃛🃜🃝🃞🃟🃟🃟🃟🃟!? ",
+    'censored': lambda x: ['█' for y in default_fraktur],
+    'cesar': lambda x: "AMWOEZKFYBVXPQCGDLJRITNUHSbfnzuymvokwaecxjghrtqpisld321465897?! ",
+    'chess': lambda x: "♔♕♖♗♘♙♚♛♜♝♞♟︎♔♕♖♗♘♙♚♛♜♝♞♟︎♔♕♖♗♘♙♚♛♜♝♞♟︎♔♕♖♗♘♙♚♛♜♝♞♟︎♔♕♖♗♘♙♚♛♜♝♞♟︎!? ",
+    'circle': lambda x: "ⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ⓪①②③④⑤⑥⑦⑧⑨!? ",
+    'circle-bold': lambda x: "🅐🅑🅒🅓🅔🅕🅖🅗🅘🅙🅚🅛🅜🅝🅞🅟🅠🅡🅢🅣🅤🅥🅦🅧🅨🅩🅐🅑🅒🅓🅔🅕🅖🅗🅘🅙🅚🅛🅜🅝🅞🅟🅠🅡🅢🅣🅤🅥🅦🅧🅨🅩⓿❶❷❸❹❺❻❼❽❾!? ",
+    'double': lambda x: "𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡!? ",
+    'fraktur': lambda x: "𝔄𝔅ℭ𝔇𝔈𝔉𝔊ℌℑ𝔍𝔎𝔏𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷0123456789!? ",
+    'fraktur-bold': lambda x: "𝕬𝕭𝕮𝕯𝕰𝕱𝕲𝕳𝕴𝕵𝕶𝕷𝕸𝕹𝕺𝕻𝕼𝕽𝕾𝕿𝖀𝖁𝖂𝖃𝖄𝖅𝖆𝖇𝖈𝖉𝖊𝖋𝖌𝖍𝖎𝖏𝖐𝖑𝖒𝖓𝖔𝖕𝖖𝖗𝖘𝖙𝖚𝖛𝖜𝖝𝖞𝖟𝟎𝟏𝟐𝟑𝟒𝟓𝟔𝟕𝟖𝟗!? ",
+    'italic': lambda x: "𝘈𝘉𝘊𝘋𝘌𝘍𝘎𝘏𝘐𝘑𝘒𝘓𝘔𝘕𝘖𝘗𝘘𝘙𝘚𝘛𝘜𝘝𝘞𝘟𝘠𝘡𝘢𝘣𝘤𝘥𝘦𝘧𝘨𝘩𝘪𝘫𝘬𝘭𝘮𝘯𝘰𝘱𝘲𝘳𝘴𝘵𝘶𝘷𝘸𝘹𝘺𝘻0123456789!? ",
+    'italic-sans': lambda x: "𝘈𝘉𝘊𝘋𝘌𝘍𝘎𝘏𝘐𝘑𝘒𝘓𝘔𝘕𝘖𝘗𝘘𝘙𝘚𝘛𝘜𝘝𝘞𝘟𝘠𝘡𝘢𝘣𝘤𝘥𝘦𝘧𝘨𝘩𝘪𝘫𝘬𝘭𝘮𝘯𝘰𝘱𝘲𝘳𝘴𝘵𝘶𝘷𝘸𝘹𝘺𝘻0123456789!? ",
+    'lower': lambda x: default_fraktur.lower(),
+    'mono': lambda x: "𝙰𝙱𝙲𝙳𝙴𝙵𝙶𝙷𝙸𝙹𝙺𝙻𝙼𝙽𝙾𝙿𝚀𝚁𝚂𝚃𝚄𝚅𝚆𝚇𝚈𝚉𝚊𝚋𝚌𝚍𝚎𝚏𝚐𝚑𝚒𝚓𝚔𝚕𝚖𝚗𝚘𝚙𝚚𝚛𝚜𝚝𝚞𝚟𝚠𝚡𝚢𝚣𝟶𝟷𝟸𝟹𝟺𝟻𝟼𝟽𝟾𝟿!? ",
+    'morse': lambda x: ["·– ", "–··· ", "–·–· ", "–·· ", "· ", "··–· ", "––· ", "···· ", "·· ", "·––– ", "–·– ", "·–·· ", "–– ", "–· ", "––– ", "·––· ", "––·– ", "·–· ", "··· ", "– ", "··– ", "···– ", "·–– ", "–··– ", "–·–– ", "––·· ", "·– ", "–··· ", "–·–· ", "–·· ", "· ", "··–· ", "––· ", "···· ", "·· ", "·––– ", "–·– ", "·–·· ", "–– ", "–· ", "––– ", "·––· ", "––·– ", "·–· ", "··· ", "– ", "··– ", "···– ", "·–– ", "–··– ", "–·–– ", "––·· ", "––––– ", "·–––– ", "··––– ", "···–– ", "····– ", "····· ", "–···· ", "––··· ", "–––·· ", "––––· ", " ", " ","/ "],
+    'numbers': lambda x: [f"{ord(y):d} " for y in default_fraktur],
+    'numbers-binary': lambda x: [f"{ord(y):0b} " for y in default_fraktur],
+    'numbers-hex': lambda x: [f"0x{ord(y):X} " for y in default_fraktur],
+    'parenthesized': lambda x: "🄐🄑🄒🄓🄔🄕🄖🄗🄘🄙🄚🄛🄜🄝🄞🄟🄠🄡🄢🄣🄤🄥🄦🄧🄨🄩⒜⒝⒞⒟⒠⒡⒢⒣⒤⒥⒦⒧⒨⒩⒪⒫⒬⒭⒮⒯⒰⒱⒲⒳⒴⒵⒪⑴⑵⑶⑷⑸⑹⑺⑻⑼!? ",
+    'rect': lambda x: "🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉𝟶𝟷𝟸𝟹𝟺𝟻𝟼𝟽𝟾𝟿!? ",
+    'rect-bold': lambda x: "🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉0123456789!? ",
+    'rect-dotted': lambda x: ["🇦 ","🇧 ","🇨 ","🇩 ","🇪 ","🇫 ","🇬 ","🇭 ","🇮 ","🇯 ","🇰 ","🇱 ","🇲 ","🇳 ","🇴 ","🇵 ","🇶 ","🇷 ","🇸 ","🇹 ","🇺 ","🇻 ","🇼 ","🇽 ","🇾 ","🇿 ","🇦 ","🇧 ","🇨 ","🇩 ","🇪 ","🇫 ","🇬 ","🇭 ","🇮 ","🇯 ","🇰 ","🇱 ","🇲 ","🇳 ","🇴 ","🇵 ","🇶 ","🇷 ","🇸 ","🇹 ","🇺 ","🇻 ","🇼 ","🇽 ","🇾 ","🇿 ","0","1","2","3","4","5","6","7","8","9","!","?"," "],
+    'script': lambda x: "𝒜𝐵𝒞𝒟𝐸𝐹𝒢𝐻𝐼𝒥𝒦𝐿𝑀𝒩𝒪𝒫𝒬𝑅𝒮𝒯𝒰𝒱𝒲𝒳𝒴𝒵𝒶𝒷𝒸𝒹𝑒𝒻𝑔𝒽𝒾𝒿𝓀𝓁𝓂𝓃𝑜𝓅𝓆𝓇𝓈𝓉𝓊𝓋𝓌𝓍𝓎𝓏𝟢𝟣𝟤𝟥𝟦𝟧𝟨𝟩𝟪𝟫!? ",
+    'script-bold': lambda x: "𝓐𝓑𝓒𝓓𝓔𝓕𝓖𝓗𝓘𝓙𝓚𝓛𝓜𝓝𝓞𝓟𝓠𝓡𝓢𝓣𝓤𝓥𝓦𝓧𝓨𝓩𝓪𝓫𝓬𝓭𝓮𝓯𝓰𝓱𝓲𝓳𝓴𝓵𝓶𝓷𝓸𝓹𝓺𝓻𝓼𝓽𝓾𝓿𝓌𝓍𝓎𝓏𝟢𝟣𝟤𝟥𝟦𝟧𝟨𝟩𝟪𝟫!? ",
+    'slack': lambda x: [slackify('white', y) for y in default_fraktur],
+    'slack-scrabble': lambda x: [f':l-{y.lower()}:' if y.isalpha() else ':l-blank:' for y in default_fraktur],
+    'slack-random': lambda x: [slackify(('yellow', 'white'), y) for y in default_fraktur],
+    'slack-yellow': lambda x: [slackify('yellow', y) for y in default_fraktur],
+    'small-caps': lambda x: "ABCDEFGHIJKLMNOPQRSTUVWXYZᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ𝟢𝟣𝟤𝟥𝟦𝟧𝟨𝟩𝟪𝟫!? ",
+    'spoiler': lambda x: [ '░▒▓'[random.randint(0,2)] for y in default_fraktur],
+    'upper': lambda x: default_fraktur.upper(),
+    'xxx-aed': lambda x: [f'{y}\u0363' for y in default_fraktur],
+    'xxx-arrowed-both': lambda x: [f'{y}\u20e1' for y in default_fraktur],
+    'xxx-arrowed-left': lambda x: [f'{y}\u20d6' for y in default_fraktur],
+    'xxx-arrowed-right': lambda x: [f'{y}\u20d7' for y in default_fraktur],
+    'xxx-slashed': lambda x: [f'{y}\u0336' for y in default_fraktur],
+    'xxx-stricken-single': lambda x: [f'{y}\u0337' for y in default_fraktur],
+    'xxx-stricken-double': lambda x: [f'{y}\u20eb' for y in default_fraktur],
+    'xxx-stricken-mirrored': lambda x: [f'{y}\u20e5' for y in default_fraktur],
+    'xxx-senior-over': lambda x: [f'{y}\u0360' for y in default_fraktur],
+    'xxx-senior-under': lambda x: [f'{y}\u033c' for y in default_fraktur],
+    'xxx-triangled': lambda x: [f'{y}\u20e4' for y in default_fraktur],
+    'xxx-umläüted-over': lambda x: [f'{y}\u0308' for y in default_fraktur],
+    'xxx-umläüted-under': lambda x:[f'{y}\u0324' for y in default_fraktur],
+    'xxx-underline-double': lambda x: [f'{y}\u0333' for y in default_fraktur],
+    'xxx-underline-single': lambda x: [f'{y}\u0332' for y in default_fraktur],
+    'xxx-underline-wave': lambda x: [f'{y}\u0330' for y in default_fraktur],
+    'xxx-wifi': lambda x: [f'{y}\u0352' for y in default_fraktur],
+    'xxx-zalgo': lambda x: [f'{y}{zalgo(x)}' for y in default_fraktur],
 }
 
 boxes = {
@@ -191,13 +191,15 @@ def index_in_font(c: str) -> int | None:
         return None
 
 
-def fraktur(message, font):
+def fraktur(message, font, configuration):
     out = ''
-    if font in fonts:
+    if font in font_generators:
+        generator = font_generators[font]
+        generated_font = generator(configuration)
         for c in message:
             index = index_in_font(c)
             if index is not None:
-                out += fonts[font][index]
+                out += generated_font[index]
             else:
                 out += c
     else:
@@ -207,12 +209,12 @@ def fraktur(message, font):
     return out
 
 
-def fraktur_all(message, selected_fonts=None, modes=None, box=None, align=None)-> str:
+def fraktur_all(message, configuration, selected_fonts=None, modes=None, box=None, align=None)-> str:
     if not modes:
         modes = []
 
     if selected_fonts is None:
-        selected_fonts = list(fonts.keys())
+        selected_fonts = list(font_generators.keys())
 
     orig_message = message
 
@@ -221,7 +223,7 @@ def fraktur_all(message, selected_fonts=None, modes=None, box=None, align=None)-
         if box:
             message = boxify(orig_message, box, align)
 
-        result = fraktur(message, font)
+        result = fraktur(message, font, configuration)
 
         if 'rainbow' in modes:
             html = 'html' in modes
@@ -266,22 +268,22 @@ def boxify(message, box=None, align=None):
             return message
 
 
-def generate(message: str, font: str = None, modes: list = None, box: str = None, align: str = None) -> str:
+def generate(message: str, configuration = None, font: str = None, modes: list = None, box: str = None, align: str = None) -> str:
     if not modes:
         modes = []
 
     if not font:
-        return fraktur_all(message, ['fraktur'], modes, box, align)
+        return fraktur_all(message, configuration, ['fraktur'], modes, box, align)
     else:
         if font == 'all':
-            return fraktur_all(message, list(fonts.keys()), modes, box, align)
+            return fraktur_all(message, configuration, list(font_generators.keys()), modes, box, align)
         else:
-            if font in fonts:
-                return fraktur_all(message, [font], modes, box, align)
+            if font in font_generators:
+                return fraktur_all(message, configuration, [font], modes, box, align)
             else:
-                found_fonts = list(filter(lambda x: x.lower().find(font.lower()) > -1, fonts.keys()))
+                found_fonts = list(filter(lambda x: x.lower().find(font.lower()) > -1, font_generators.keys()))
                 if len(found_fonts) > 0:
-                    return fraktur_all(message, found_fonts, modes, box, align)
+                    return fraktur_all(message, configuration, found_fonts, modes, box, align)
                 else:
                     return f"Font {font} not found."
 
@@ -304,7 +306,7 @@ def main():
     parser.add_argument(
         '--font', '-f',
         metavar='FONT | all',
-        help=f'One font of [{", ".join(['all'] + list(fonts.keys()))}], "all" for all fonts consecutively.'
+        help=f'One font of [{", ".join(['all'] + list(font_generators.keys()))}], "all" for all fonts consecutively.'
     )
     parser.add_argument(
         '--modes', '-m',
@@ -324,6 +326,12 @@ def main():
         metavar='ALIGNMENT',
         help=f'Select a text alignment (in box) from one of [{", ".join(box_alignments.keys())}].'
     )
+    parser.add_argument(
+        '--count', '-c',
+        metavar='COUNT',
+        default=111,
+        type=int,
+        help=f'Sets the zalgo glyph count per character to COUNT. Default is 111.' )
     parser.add_argument(
         '--list', '-l',
         action='store_true',
@@ -349,6 +357,7 @@ def main():
     if doit:
         result = generate(
             message=args.message,
+            configuration=args.count,
             font=args.font,
             modes=args.modes,
             box=args.box,
