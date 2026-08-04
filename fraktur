@@ -344,7 +344,7 @@ def main():
         print('No "message" given')
         args.message = 'Hello World.'
     elif args.list:
-        print(",".join(fonts.keys()))
+        print(",".join(font_generators.keys()))
         doit = False
     else:
         map(lambda x: x.strip(), args.message)
