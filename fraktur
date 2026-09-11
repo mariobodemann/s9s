@@ -77,6 +77,7 @@ font_generators = {
     'xxx-senior-over': lambda x: [f'{y}\u0360' for y in default_fraktur],
     'xxx-senior-under': lambda x: [f'{y}\u033c' for y in default_fraktur],
     'xxx-triangled': lambda x: [f'{y}\u20e4' for y in default_fraktur],
+    'xxx-overlined': lambda x:[f'{y}\u0305' for y in default_fraktur],
     'xxx-umläüted-over': lambda x: [f'{y}\u0308' for y in default_fraktur],
     'xxx-umläüted-under': lambda x:[f'{y}\u0324' for y in default_fraktur],
     'xxx-underline-double': lambda x: [f'{y}\u0333' for y in default_fraktur],
